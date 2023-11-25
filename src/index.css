@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+}
+
+.map-container{
+  width: 100%;
+  height: 80vh;
+  z-index: 1;
+  border-radius: 1%;
+}
