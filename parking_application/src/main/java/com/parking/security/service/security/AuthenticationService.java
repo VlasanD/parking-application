@@ -1,4 +1,4 @@
-package com.parking.security.Service.security;
+package com.parking.security.service.security;
 
 import com.parking.security.dto.request.AuthenticationRequest;
 import com.parking.security.dto.response.AuthenticationResponse;

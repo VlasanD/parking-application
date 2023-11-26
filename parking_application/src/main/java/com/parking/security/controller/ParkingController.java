@@ -1,25 +1,24 @@
 package com.parking.security.controller;
 
-import com.parking.security.Service.ParkingService;
+import com.parking.security.service.ParkingService;
 import com.parking.security.dto.response.ParkingResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/parking")
+@CrossOrigin(originPatterns = "*")
 public class ParkingController {
 
     private final ParkingService parkingService;
 
-    @GetMapping(path = "{district}")
-    public List<ParkingResponse> getAvailableParkingByDistrict(@PathVariable("district") String district) {
-        return parkingService.getAvailableParkingByDistrict(district);
+    @GetMapping()
+    public ResponseEntity<List<ParkingResponse>> getAvailableParkingByDistrict(@RequestParam String district) {
+        return ResponseEntity.ok(parkingService.getAvailableParkingByDistrict(district));
     }
 }
 

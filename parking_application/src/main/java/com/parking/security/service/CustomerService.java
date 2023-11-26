@@ -1,4 +1,4 @@
-package com.parking.security.Service;
+package com.parking.security.service;
 
 import com.parking.security.repository.CustomerRepository;
 import jakarta.transaction.Transactional;

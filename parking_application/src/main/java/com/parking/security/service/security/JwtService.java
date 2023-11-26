@@ -1,4 +1,4 @@
-package com.parking.security.Service.security;
+package com.parking.security.service.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,7 +1,7 @@
 package com.parking.security.controller;
 
 
-import com.parking.security.Service.security.AuthenticationService;
+import com.parking.security.service.security.AuthenticationService;
 import com.parking.security.dto.request.AuthenticationRequest;
 import com.parking.security.dto.request.RegisterRequest;
 import com.parking.security.dto.response.AuthenticationResponse;

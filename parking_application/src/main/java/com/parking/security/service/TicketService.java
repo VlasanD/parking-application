@@ -1,4 +1,4 @@
-package com.parking.security.Service;
+package com.parking.security.service;
 
 import com.parking.security.dto.request.TicketRequest;
 import com.parking.security.dto.response.TicketResponse;
@@ -23,9 +23,13 @@ public class TicketService {
     private final CustomerRepository customerRepository;
     private final ParkingRepository parkingRepository;
 
-    public List<TicketResponse> findAllByCustomerId(Long id) {
-        List<Ticket> allByCustomerId = ticketRepository.findAllByCustomer_Id(id)
-                .orElseThrow(() -> new IllegalStateException("Cannot find any tickets"));
+    public List<TicketResponse> findAllByCustomerEmail(String email) {
+        List<Ticket> allByCustomerId = ticketRepository.findAllByCustomer_Email(email);
+
+        if (allByCustomerId.isEmpty()) {
+            throw new IllegalStateException("No tickets for this customer");
+        }
+
         return allByCustomerId.stream()
                 .map(
                         ticket ->
@@ -39,10 +43,10 @@ public class TicketService {
                 .collect(Collectors.toList());
     }
 
-    public TicketResponse addTicket(TicketRequest ticketRequest) {
+    public TicketResponse addTicket(TicketRequest ticketRequest, String customerEmail) {
         Parking parking = parkingRepository.findById(ticketRequest.getIdParking())
                 .orElseThrow(() -> new IllegalStateException("Cannot find the parking"));
-        Customer customer = customerRepository.findByEmail(ticketRequest.getCustomerEmail())
+        Customer customer = customerRepository.findByEmail(customerEmail)
                 .orElseThrow(() -> new IllegalStateException("Cannot find the customer"));
         Ticket ticket = Ticket
                 .builder()

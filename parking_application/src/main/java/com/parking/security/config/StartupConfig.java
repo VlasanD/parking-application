@@ -22,6 +22,7 @@ public class StartupConfig {
             Parking p1 = Parking
                     .builder()
                     .name("ana")
+                    .district("Central")
                     .build();
             // TODO save the list of parking
             List<Parking> parkingListFromDb = parkingRepository.saveAll(List.of(p1));

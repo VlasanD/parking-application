@@ -1,6 +1,6 @@
 package com.parking.security.config.security.filter;
 
-import com.parking.security.Service.security.JwtService;
+import com.parking.security.service.security.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
