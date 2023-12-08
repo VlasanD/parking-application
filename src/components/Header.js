@@ -1,6 +1,6 @@
 import { Box, Button, Divider, HStack, Text, VStack, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
-import { faParking, faComments, faTicket, faClose, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faParking, faComments, faTicket, faClose, faBars, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../providers/AuthProvider";
@@ -8,7 +8,7 @@ import { useAuth } from "../providers/AuthProvider";
 
 function Header() {
 
-  const { token } = useAuth();
+  const { token, setToken } = useAuth();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -100,7 +100,9 @@ function Header() {
                 :
               (<>
                 <Link to="/profile"> Profile </Link>
-                <Link to="/logout"> Log out </Link>
+                <Button onClick={() => setToken("")}>
+                  <FontAwesomeIcon icon={faRightFromBracket} name={"Log out"} size={"lg"}></FontAwesomeIcon>
+                </Button>
               </>)
               }
           
@@ -135,7 +137,9 @@ function Header() {
                 :
               ( <>
                 <Link to="/profile"> Profile </Link>
-                <Link to="/logout"> Log out </Link>
+                <Button onClick={() => setToken("")}>
+                  <FontAwesomeIcon icon={faRightFromBracket} name={"Log out"} size={"lg"}></FontAwesomeIcon>
+                </Button>
                </>)
               }
               

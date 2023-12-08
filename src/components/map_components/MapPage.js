@@ -2,41 +2,12 @@ import { Flex, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { useLoadScript } from "@react-google-maps/api";
 import ParkingCard from "./ParkingCard";
 import Map from "./Map";
-import parking_image from "./parking.jpg";
+import { useLocation } from "react-router-dom";
 
-const parkings = [
-
-  {
-    url: parking_image,
-    title: 'Central Parking',
-    descr: 'Near Piata Unirii, Central Shopping Center and Technical University, on Daicovici 54',
-    coord: { lat: 46.771369, lng: 23.586161 }
-  },
-  {
-    url: parking_image,
-    title: 'Central Parking',
-    descr: 'Near Piata Unirii, Central Shopping Center and Technical University, on Daicovici 54',
-    coord: { lat: 46.771369, lng: 23.586161 }
-  },
-  {
-    url: parking_image,
-    title: 'Central Parking',
-    descr: 'Near Piata Unirii, Central Shopping Center and Technical University, on Daicovici 54',
-    coord: { lat: 46.771369, lng: 23.586161 }
-  },
-  {
-    url: parking_image,
-    title: 'Central Parking',
-    descr: 'Near Piata Unirii, Central Shopping Center and Technical University, on Daicovici 54',
-    coord: { lat: 46.771369, lng: 23.586161 }
-  },
-
-];
-
-
-
-const MapPage = ({ center, zoom, }) => {
+const MapPage = ({ center, zoom }) => {
   const { isLoaded } = useLoadScript({ googleMapsApiKey: "AIzaSyBgSvt1UygxIe2XLsMCQAuiYOSmV_IW2C8" });
+  const location = useLocation();
+  const { parkings } = location.state;
   // CAREFUL HERE
   center = { lat: 46.770014, lng: 23.589608 };
   zoom = 14;
@@ -54,8 +25,15 @@ const MapPage = ({ center, zoom, }) => {
             <Stack spacing={8} py={20} px={6} minW="95%" direction={['column', 'column', 'column', 'row']} >
               <Map zoom={zoom} center={center} />
               <Stack overflowY={"scroll"} height={"80vh"}>
-                {parkings.map((parking => <ParkingCard imageURL={parking.url} description={parking.descr} title={parking.title} />
-                ))}
+                {
+                  parkings.map((
+                    parking =>
+                      <ParkingCard
+                        imageURL={parking.imageUrl}
+                        description={"Base price per hour: " + parking.price + " RON"}
+                        title={parking.name} />
+                  ))
+                }
 
               </Stack>
             </Stack>

@@ -21,18 +21,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-
-      // Set token in an HttpOnly cookie with a one-day expiration
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token.token;
+      axios.defaults.withCredentials = true;
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 1);
 
-      document.cookie = `token=${token}; expires=${expirationDate.toUTCString()}; HttpOnly; Secure; SameSite=Strict`;
+      document.cookie = `token=${token}; expires=${expirationDate.toUTCString()};`;
     } else {
       delete axios.defaults.headers.common["Authorization"];
-
+      axios.defaults.withCredentials = false; 
       // Remove the token cookie
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; HttpOnly; Secure; SameSite=Strict';
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
     }
   }, [token]);
 

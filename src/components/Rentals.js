@@ -1,34 +1,24 @@
 import {Flex, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, useColorModeValue} from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const tickets = [
-  {
-    location: "Buna ziua",
-    from: "12/25/2023 05:05 AM",
-    to: "12/25/2023 07:05 AM",
-    price: "15.5"
-  },
-  {
-    location: "Buna ziua",
-    from: "12/25/2023 05:05 AM",
-    to: "12/25/2023 07:05 AM",
-    price: "15.5"
-  },
-  {
-    location: "Buna ziua",
-    from: "12/25/2023 05:05 AM",
-    to: "12/25/2023 07:05 AM",
-    price: "15.5"
-  },
-  {
-    location: "Buna ziua",
-    from: "12/25/2023 05:05 AM",
-    to: "12/25/2023 07:05 AM",
-    price: "15.5"
-  },
-
-]
+// TODO connect to backend
+const TICKETS_URL = "http://localhost:8080/api/ticket";
 
 function Rentals() {
+
+  const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+    async function fetchTickets(){
+    await axios.get(TICKETS_URL)
+      .then(response => {
+        setTickets(response.data);
+      }).catch(error => console.log(error));
+      }
+    fetchTickets();
+  }, []);
+
   return (
     <Flex
       paddingTop="100"
@@ -63,9 +53,9 @@ function Rentals() {
             {tickets.map(t => {
               return (
                 <Tr>
-                  <Td>{t.location}</Td>
-                  <Td>{t.from}</Td>
-                  <Td>{t.to}</Td>
+                  <Td>{t.parkingName}</Td>
+                  <Td>{t.dataIn}</Td>
+                  <Td>{t.dataOut}</Td>
                   <Td>{t.price + " RON"}</Td>
 
                 </Tr>

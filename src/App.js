@@ -24,7 +24,6 @@ function App() {
           <Route path="/rentals" element={<ProtectedRoute component={<Rentals />} />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/logout" element={<ProtectedRoute component={<>Log Out</>} />}></Route>
           <Route path="/profile" element={<ProtectedRoute component={<>Profile</>} />}></Route>
           <Route path='/map' element={<ProtectedRoute component={<MapPage />} />}></Route>
         </Routes>
