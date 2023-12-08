@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TicketRequest {
     private Long idParking;
-    private String customerEmail;
     private LocalDateTime dataIn;
     private LocalDateTime dataOut;
 }

@@ -3,12 +3,14 @@ package com.parking.security.config;
 import com.parking.security.model.Customer;
 import com.parking.security.model.Parking;
 import com.parking.security.model.Ticket;
+import com.parking.security.model.enums.Role;
 import com.parking.security.repository.CustomerRepository;
 import com.parking.security.repository.ParkingRepository;
 import com.parking.security.repository.TicketRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
 @Configuration
 public class StartupConfig {
     @Bean
-    CommandLineRunner commandLineRunner(ParkingRepository parkingRepository, CustomerRepository customerRepository, TicketRepository ticketRepository) {
+    CommandLineRunner commandLineRunner(ParkingRepository parkingRepository, CustomerRepository customerRepository, TicketRepository ticketRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             Parking p1 = Parking
                     .builder()
@@ -102,7 +104,8 @@ public class StartupConfig {
                     .firstName("Ionel")
                     .lastName("Banciu")
                     .email("banciu.ionel@gmail.com")
-                    .password("ionelBanciu1234")
+                    .password(passwordEncoder.encode( "ionelBanciu1234"))
+                    .role(Role.USER)
                     .build();
 
             Customer c2 = Customer
@@ -110,7 +113,8 @@ public class StartupConfig {
                     .firstName("Aurora")
                     .lastName("Sîrbu")
                     .email("auroro_sirbu@gmail.com")
-                    .password("gianinaandrei")
+                    .password(passwordEncoder.encode("gianinaandrei"))
+                    .role(Role.USER)
                     .build();
 
             Customer c3 = Customer
@@ -118,7 +122,8 @@ public class StartupConfig {
                     .firstName("Raul")
                     .lastName("Muntean")
                     .email("muntean.raul@gmail.com")
-                    .password("raulraul23")
+                    .password(passwordEncoder.encode("raulraul23"))
+                    .role(Role.USER)
                     .build();
 
             List<Customer> customerListFromDb = customerRepository.saveAll(List.of(c1, c2, c3));
@@ -126,6 +131,7 @@ public class StartupConfig {
             Ticket t1 = Ticket
                     .builder()
                     .dataIn(LocalDateTime.now())
+                    .dataOut(LocalDateTime.now())
                     .parking(parkingListFromDb.get(0))
                     .customer(customerListFromDb.get(0))
                     .build();
@@ -133,6 +139,7 @@ public class StartupConfig {
             Ticket t2 = Ticket
                     .builder()
                     .dataIn(LocalDateTime.now().minusMinutes(30))
+                    .dataOut(LocalDateTime.now())
                     .parking(parkingListFromDb.get(1))
                     .customer(customerListFromDb.get(1))
                     .build();
@@ -140,6 +147,7 @@ public class StartupConfig {
             Ticket t3 = Ticket
                     .builder()
                     .dataIn(LocalDateTime.now().minusMinutes(30).minusDays(3))
+                    .dataOut(LocalDateTime.now())
                     .parking(parkingListFromDb.get(3))
                     .customer(customerListFromDb.get(1))
                     .build();
@@ -147,6 +155,7 @@ public class StartupConfig {
             Ticket t4 = Ticket
                     .builder()
                     .dataIn(LocalDateTime.now().minusWeeks(1).minusMinutes(2))
+                    .dataOut(LocalDateTime.now())
                     .parking(parkingListFromDb.get(5))
                     .customer(customerListFromDb.get(0))
                     .build();
@@ -154,6 +163,7 @@ public class StartupConfig {
             Ticket t5 = Ticket
                     .builder()
                     .dataIn(LocalDateTime.now().minusMinutes(29).minusDays(10))
+                    .dataOut(LocalDateTime.now())
                     .parking(parkingListFromDb.get(2))
                     .customer(customerListFromDb.get(2))
                     .build();
@@ -161,6 +171,7 @@ public class StartupConfig {
             Ticket t6 = Ticket
                     .builder()
                     .dataIn(LocalDateTime.now().minusDays(15).minusHours(2).minusMinutes(23))
+                    .dataOut(LocalDateTime.now())
                     .parking(parkingListFromDb.get(6))
                     .customer(customerListFromDb.get(0))
                     .build();

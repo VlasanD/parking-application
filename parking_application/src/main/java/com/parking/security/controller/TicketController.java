@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 @RequestMapping(path = "api/ticket")
-@CrossOrigin(originPatterns = "*")
 public class TicketController {
     TicketService ticketService;
     JwtService jwtService;

@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/parking")
-@CrossOrigin(originPatterns = "*")
 public class ParkingController {
 
     private final ParkingService parkingService;
