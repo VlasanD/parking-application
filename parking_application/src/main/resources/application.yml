@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/parking
+        url: jdbc:postgresql://localhost:5433/parking
         username: postgres
-        password: root
+        password: admin #root
         driver-class-name: org.postgresql.Driver
     jpa:
         hibernate:

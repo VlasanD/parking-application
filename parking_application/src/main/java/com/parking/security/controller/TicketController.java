@@ -1,6 +1,6 @@
 package com.parking.security.controller;
 
-import com.parking.security.service.TicketService;
+import com.parking.security.service.impl.TicketServiceImpl;
 import com.parking.security.dto.request.TicketRequest;
 import com.parking.security.dto.response.TicketResponse;
 import com.parking.security.service.security.JwtService;
@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "api/ticket")
 public class TicketController {
-    TicketService ticketService;
+    TicketServiceImpl ticketService;
     JwtService jwtService;
     @GetMapping()
     public ResponseEntity<List<TicketResponse>> findAllByCustomerId(

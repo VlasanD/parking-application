@@ -1,6 +1,6 @@
 package com.parking.security.controller;
 
-import com.parking.security.service.ParkingService;
+import com.parking.security.service.impl.ParkingServiceImpl;
 import com.parking.security.dto.response.ParkingResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(path = "api/parking")
 public class ParkingController {
 
-    private final ParkingService parkingService;
+    private final ParkingServiceImpl parkingService;
 
     @GetMapping()
     public ResponseEntity<List<ParkingResponse>> getAvailableParkingByDistrict(@RequestParam String district) {
