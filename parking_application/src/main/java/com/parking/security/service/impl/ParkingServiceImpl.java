@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ParkingServiceImpl implements ParkingService {
     private final ParkingRepository parkingRepository;
 
-    // TODO filter so that it only shows available parking lots
+    // filter so that it only shows available parking lots
     public List<ParkingResponse> getAvailableParkingByDistrict(String district) {
         List<Parking> parkingList = parkingRepository.findByDistrict(district);
 
