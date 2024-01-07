@@ -3,14 +3,15 @@ import { useLoadScript } from "@react-google-maps/api";
 import ParkingCard from "./ParkingCard";
 import Map from "./Map";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
-const MapPage = ({ center, zoom }) => {
+const MapPage = () => {
   const { isLoaded } = useLoadScript({ googleMapsApiKey: "AIzaSyBgSvt1UygxIe2XLsMCQAuiYOSmV_IW2C8" });
   const location = useLocation();
-  const { parkings } = location.state;
+  const { parkings, inDate, outDate } = location.state;
   // CAREFUL HERE
-  center = { lat: 46.770014, lng: 23.589608 };
-  zoom = 14;
+  const [ center, setCenter ] = useState({ lat: 46.770014, lng: 23.589608 })
+  const zoom = 14;
   return (
     <Flex
       minH={'100vh'}
@@ -29,9 +30,17 @@ const MapPage = ({ center, zoom }) => {
                   parkings.map((
                     parking =>
                       <ParkingCard
-                        imageURL={parking.imageUrl}
-                        description={"Base price per hour: " + parking.price + " RON"}
-                        title={parking.name} />
+                        key = {parking.id}
+                        imageURL = {parking.imageUrl}
+                        description = {"Base price per hour: " + parking.price + " RON"}
+                        title = {parking.name} 
+                        lat = {parking.latitude}
+                        lng = {parking.longitude}
+                        setCenter = {setCenter}
+                        idParking = {parking.id}
+                        inDate = {inDate}
+                        outDate = {outDate}
+                        />
                   ))
                 }
 

@@ -47,8 +47,7 @@ const ParkingForm = () => {
         )
           .then(response => {
             setParkings(response.data);
-            alert(response.data);
-            navigate("/map", { state: { parkings: response.data } });
+            navigate("/map", { state: { parkings: response.data, inDate: values.from, outDate: values.until} });
           }).catch(error => console.log(error));
       }
       findParking();
