@@ -2,8 +2,11 @@ Parking Application in Cluj-Napoca
 
 Functionalities
 > Create an account
+
 > Book a parking spot
+
 > Review transaction history
+
 > Customer Support(UI)
 
 The application uses the 3000 port(default for Create-React-App).
